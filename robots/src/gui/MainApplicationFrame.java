@@ -28,20 +28,19 @@ import log.Logger;
  */
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
-    
 
     public MainApplicationFrame() {
-        //Make the big window be indented 50 pixels from each edge
-        //of the screen.
-        int inset = 50;        
+        AppRussifier.runRussifier();
+
+        // Make the big window be indented 50 pixels from each edge
+        // of the screen.
+        int inset = 50;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setBounds(inset, inset,
                 screenSize.width - inset * 2,
                 screenSize.height - inset * 2);
 
         setContentPane(desktopPane);
-        
-        
 
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
