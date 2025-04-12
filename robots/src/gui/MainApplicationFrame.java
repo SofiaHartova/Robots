@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -16,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import log.Logger;
 
 /**
@@ -58,6 +56,9 @@ public class MainApplicationFrame extends JFrame {
 
         setJMenuBar(generateMenuBar());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        WindowStateManager.loadWindowStates(desktopPane.getAllFrames());
+
     }
 
     protected LogWindow createLogWindow() {
@@ -80,6 +81,9 @@ public class MainApplicationFrame extends JFrame {
                 JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION)
             return;
+
+        WindowStateManager.saveWindowStates(desktopPane.getAllFrames());
+
         this.dispose();
         System.exit(0);
     }
