@@ -43,21 +43,21 @@ public class MainApplicationFrame extends JFrame {
 
         setContentPane(desktopPane);
 
-         // Создание модели робота
-         RobotModel robotModel = new RobotModel();
+        // Создание модели робота
+        RobotModel robotModel = new RobotModel();
 
-         // Создание и добавление лог-окна
-         LogWindow logWindow = createLogWindow();
-         addStatefulWindow(logWindow);
- 
-         // Создание и добавление окна с визуализацией игры
-         GameVisualizer visualizer = new GameVisualizer(robotModel);
-         GameWindow gameWindow = new GameWindow(visualizer);
-         addStatefulWindow(gameWindow);
- 
-         // Создание и добавление окна с координатами робота
-         RobotCoordinatesWindow coordinatesWindow = new RobotCoordinatesWindow(robotModel);
-         addStatefulWindow(coordinatesWindow);
+        // Создание и добавление лог-окна
+        LogWindow logWindow = createLogWindow();
+        addStatefulWindow(logWindow);
+
+        // Создание и добавление окна с визуализацией игры
+        GameVisualizer visualizer = new GameVisualizer(robotModel);
+        GameWindow gameWindow = new GameWindow(visualizer);
+        addStatefulWindow(gameWindow);
+
+        // Создание и добавление окна с координатами робота
+        RobotCoordinatesWindow coordinatesWindow = new RobotCoordinatesWindow(robotModel);
+        addStatefulWindow(coordinatesWindow);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -88,11 +88,13 @@ public class MainApplicationFrame extends JFrame {
     }
 
     private void closeHandler() {
-        int n = JOptionPane.showConfirmDialog(this, "Вы уверены, что хотите выйти?", getTitle(), JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(this, "Вы уверены, что хотите выйти?", getTitle(),
+                JOptionPane.YES_NO_OPTION);
         if (n != JOptionPane.YES_OPTION)
             return;
 
         WindowStateManager.saveStates(windows);
+        desktopPane.getAllFrames()[0].dispose();
         dispose();
         System.exit(0);
     }
