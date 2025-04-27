@@ -43,11 +43,21 @@ public class MainApplicationFrame extends JFrame {
 
         setContentPane(desktopPane);
 
-        LogWindow logWindow = createLogWindow();
-        addStatefulWindow(logWindow);
+         // Создание модели робота
+         RobotModel robotModel = new RobotModel();
 
-        GameWindow gameWindow = new GameWindow();
-        addStatefulWindow(gameWindow);
+         // Создание и добавление лог-окна
+         LogWindow logWindow = createLogWindow();
+         addStatefulWindow(logWindow);
+ 
+         // Создание и добавление окна с визуализацией игры
+         GameVisualizer visualizer = new GameVisualizer(robotModel);
+         GameWindow gameWindow = new GameWindow(visualizer);
+         addStatefulWindow(gameWindow);
+ 
+         // Создание и добавление окна с координатами робота
+         RobotCoordinatesWindow coordinatesWindow = new RobotCoordinatesWindow(robotModel);
+         addStatefulWindow(coordinatesWindow);
 
         this.addWindowListener(new WindowAdapter() {
             @Override

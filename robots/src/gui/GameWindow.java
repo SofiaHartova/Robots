@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 import javax.swing.*;
@@ -8,10 +9,12 @@ public class GameWindow extends JInternalFrame implements StatefulWindow {
 
     private final GameVisualizer m_visualizer;
 
-    public GameWindow() {
+    public GameWindow(GameVisualizer visualizer) {  
         super("Игровое поле", true, true, true, true);
-        m_visualizer = new GameVisualizer();
-        add(m_visualizer);
+        m_visualizer = visualizer;
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(m_visualizer, BorderLayout.CENTER);
+        getContentPane().add(panel);
         pack();
     }
 
